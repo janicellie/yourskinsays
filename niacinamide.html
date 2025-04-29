@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourSkinSays - Niacinamide</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: white; color: #333; }
+    header { background-color: #ffcccb; padding: 20px; text-align: center; }
+    a { color: #0099cc; text-decoration: none; }
+    .main-content { padding: 20px; }
+    .review { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>YourSkinSays - Niacinamide</h1>
+    <p>Learn about Niacinamide and explore recommended products.</p>
+  </header>
+
+  <div class="main-content">
+    <h2>What is Niacinamide?</h2>
+    <p>Niacinamide is a form of Vitamin B3 known for its anti-inflammatory and skin-brightening properties.</p>
+    <h3>Recommended Product</h3>
+    <p><a href="https://www.amazon.com.au/Supersize-Niacinamide-10-Zinc-1/dp/B07VVRXFWC/ref=sr_1_5?crid=1OMLTV621YWE3&dib=eyJ2IjoiMSJ9.UFXRYpWtr3aJ2ctnNDvboa2plxFMoZSv5lW31lwgIRq5Do1aAdA9QO6Kf-aWwlP4wZY_isFo803YmUO5Y6GFurwhmfAoy4tvPB7n5oFTKKTmQslWsG7Ua0KxFXGPoGGcl48v555w00kd_GRksCZ1jEbGUFVRF2FW53-IeY56CdghdzbxqMycAUakjm7wbLZKpPjj1c0I0Hblt1BopN4rvq8M194oJl55C0MBDn8T_54tF4JsZvyp2v3-Rj9tmUddiylhJ7y1q6p14TO86FJRaLkPYAb4YvAA1cqzjJAOtCQ.-wtsdW_3__VBmTVYhRmJaOZVIkJ1qXyv_q3JfkBYUqw&dib_tag=se&keywords=the+ordinary+niacinamide&qid=1745916058&sprefix=the+ordinary%2Caps%2C300&sr=8-5" target="_blank">The Ordinary Niacinamide 10% + Zinc 1%</a></p>
+
+    <div class="review">
+      <h3>Submit a Review</h3>
+      <form id="reviewForm">
+        <textarea id="reviewText" placeholder="Write your review..." rows="4" cols="50"></textarea><br>
+        <button type="submit">Submit</button>
+      </form>
+
+      <h4>Previous Reviews</h4>
+      <ul id="reviewList"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Get elements
+    const reviewForm = document.getElementById('reviewForm');
+    const reviewText = document.getElementById('reviewText');
+    const reviewList = document.getElementById('reviewList');
+
+    // Load reviews from local storage
+    document.addEventListener('DOMContentLoaded', loadReviews);
+
+    // Submit review
+    reviewForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const review = reviewText.value;
+      if (review) {
+        addReviewToStorage(review);
+        reviewText.value = ''; // Clear the text area
+      }
+    });
+
+    // Add review to local storage
+    function addReviewToStorage(review) {
+      let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+      reviews.push(review);
+      localStorage.setItem('reviews', JSON.stringify(reviews));
+      loadReviews();
+    }
+
+    // Load reviews from local storage
+    function loadReviews() {
+      let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+      reviewList.innerHTML = reviews.map(r => `<li>${r}</li>`).join('');
+    }
+  </script>
+</body>
+</html>
